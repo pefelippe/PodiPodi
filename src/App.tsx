@@ -21,27 +21,13 @@ function App() {
 
   useEffect(() => {
     playAudio();
-    
-    // Add click event listener to the whole document
-    const handleClick = () => {
-      if (audioRef.current && audioRef.current.paused) {
-        playAudio();
-      }
-    };
-
-    document.addEventListener('click', handleClick);
-    document.addEventListener('touchstart', handleClick);
-
-    return () => {
-      document.removeEventListener('click', handleClick);
-      document.removeEventListener('touchstart', handleClick);
-    };
   }, []);
 
   return (
     <div className="App" style={{ 
       width: '100%',
-      height: '100%',
+      height: '95%',
+      overflow: 'hidden',
       margin: '0',
       padding: '0',
       display: 'flex',
@@ -53,7 +39,7 @@ function App() {
         <img 
           src={tenorGif}
           alt="tenor gif" 
-          style={{ height: '100vh', width: '100vw' }}
+          style={{ height: '90vh', width: '100vw' }}
         />
         {showPlayButton && (
           <button
