@@ -5,6 +5,7 @@ import yellowSong from './Yellow emoji dancing meme ｜ VIDRADO EM VOCE 🇧🇷
 function App() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [showPlayButton, setShowPlayButton] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
 
   const playAudio = async () => {
     try {
@@ -16,6 +17,13 @@ function App() {
     } catch (error) {
       console.log('Auto-play was prevented:', error);
       setShowPlayButton(true);
+    }
+  };
+
+  const toggleMute = () => {
+    if (audioRef.current) {
+      audioRef.current.muted = !audioRef.current.muted;
+      setIsMuted(!isMuted);
     }
   };
 
@@ -61,6 +69,23 @@ function App() {
             Clique para tocar música
           </button>
         )}
+        <button
+          onClick={toggleMute}
+          style={{
+            position: 'absolute',
+            top: '20px',
+            right: '20px',
+            padding: '10px',
+            fontSize: '16px',
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            zIndex: 1000
+          }}
+        >
+          {isMuted ? '🔇' : '🔊'}
+        </button>
       </div>
       <audio 
         ref={audioRef}
